@@ -25,7 +25,6 @@ class ProductDetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Recuperación manual y segura desde los argumentos del Fragment
         val productId = arguments?.getInt("productId") ?: -1
 
         return ComposeView(requireContext()).apply {
@@ -36,7 +35,6 @@ class ProductDetailFragment : Fragment() {
                     val viewModel = hiltViewModel<ProductDetailViewModel>()
                     val state by viewModel.state.collectAsStateWithLifecycle()
 
-                    // Se ejecuta de manera segura al entrar en la composición del fragmento
                     LaunchedEffect(productId) {
                         if (productId != -1) {
                             viewModel.loadProductDetail(productId)

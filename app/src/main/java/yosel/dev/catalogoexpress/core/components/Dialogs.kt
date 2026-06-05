@@ -100,7 +100,7 @@ fun DialogError(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(12.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = iconColor, // El botón combina con el icono
+                        containerColor = iconColor,
                         contentColor = MaterialTheme.colorScheme.onError
                     )
                 ) {

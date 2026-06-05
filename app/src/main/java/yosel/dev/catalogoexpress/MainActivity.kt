@@ -16,15 +16,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        // Creamos de forma dinámica el contenedor donde se van a intercambiar los fragmentos
         val rootContainer = FragmentContainerView(this).apply {
-            id = R.id.nav_graph // Usamos un ID de recurso válido
+            id = R.id.nav_graph
         }
         setContentView(rootContainer)
 
-        // Inicializamos el Grafo de fragmentos de forma segura
+
         if (savedInstanceState == null) {
-            // Pasamos el ID de tu grafo XML (nav_graph.xml)
             val navHostFragment = NavHostFragment.create(R.navigation.nav_graph)
 
             supportFragmentManager.beginTransaction()
