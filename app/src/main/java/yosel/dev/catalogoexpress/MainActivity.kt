@@ -1,47 +1,34 @@
 package yosel.dev.catalogoexpress
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import yosel.dev.catalogoexpress.ui.theme.CatalogoExpressTheme
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentContainerView
+import androidx.navigation.fragment.NavHostFragment
+import dagger.hilt.android.AndroidEntryPoint
 
-class MainActivity : ComponentActivity() {
+@AndroidEntryPoint
+class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContent {
-            CatalogoExpressTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+
+        val rootContainer = FragmentContainerView(this).apply {
+            id = R.id.nav_graph
         }
-    }
-}
+        setContentView(rootContainer)
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    CatalogoExpressTheme {
-        Greeting("Android")
+        if (savedInstanceState == null) {
+            val navHostFragment = NavHostFragment.create(R.navigation.nav_graph)
+
+            supportFragmentManager.beginTransaction()
+                .replace(rootContainer.id, navHostFragment)
+                .setPrimaryNavigationFragment(navHostFragment)
+                .commit()
+        }
     }
 }
