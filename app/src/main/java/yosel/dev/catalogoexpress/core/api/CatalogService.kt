@@ -7,5 +7,5 @@ import yosel.dev.catalogoexpress.core.response.ProductListResponse
 interface CatalogService {
 
     @GET("products")
-    suspend fun getProductos(): Response<ProductListResponse>
+    suspend fun getProducts(): Response<ProductListResponse>
 }
