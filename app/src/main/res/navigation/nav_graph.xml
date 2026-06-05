@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/productListFragment">
+
+    <fragment
+        android:id="@+id/productListFragment"
+        android:name="yosel.dev.catalogoexpress.screen.list.ui.ProductListFragment"
+        android:label="Catálogo">
+
+        <action
+            android:id="@+id/action_productListToProductDetail"
+            app:destination="@id/productDetailFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="yosel.dev.catalogoexpress.screen.details.ui.ProductDetailFragment"
+        android:label="Detalle del Producto">
+
+        <argument
+            android:name="productId"
+            app:argType="integer" />
+    </fragment>
+
+</navigation>

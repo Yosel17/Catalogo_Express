@@ -1,49 +1,36 @@
 package yosel.dev.catalogoexpress
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentContainerView
+import androidx.navigation.fragment.NavHostFragment
 import dagger.hilt.android.AndroidEntryPoint
-import yosel.dev.catalogoexpress.ui.theme.CatalogoExpressTheme
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContent {
-            CatalogoExpressTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+
+        // Creamos de forma dinámica el contenedor donde se van a intercambiar los fragmentos
+        val rootContainer = FragmentContainerView(this).apply {
+            id = R.id.nav_graph // Usamos un ID de recurso válido
         }
-    }
-}
+        setContentView(rootContainer)
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+        // Inicializamos el Grafo de fragmentos de forma segura
+        if (savedInstanceState == null) {
+            // Pasamos el ID de tu grafo XML (nav_graph.xml)
+            val navHostFragment = NavHostFragment.create(R.navigation.nav_graph)
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    CatalogoExpressTheme {
-        Greeting("Android")
+            supportFragmentManager.beginTransaction()
+                .replace(rootContainer.id, navHostFragment)
+                .setPrimaryNavigationFragment(navHostFragment)
+                .commit()
+        }
     }
 }
