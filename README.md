@@ -56,5 +56,5 @@ El repositorio está completamente configurado y listo para clonar, compilar y e
 
 ### 1. Clonar el repositorio
 ```bash
-git clone [https://github.com/TU_USUARIO/catalogo-express.git](https://github.com/TU_USUARIO/catalogo-express.git)
+git clone https://github.com/Yosel17/Catalogo_Express.git
 cd catalogo-express
