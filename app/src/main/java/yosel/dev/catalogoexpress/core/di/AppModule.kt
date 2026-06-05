@@ -11,6 +11,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import yosel.dev.catalogoexpress.BuildConfig
 import yosel.dev.catalogoexpress.core.api.CatalogService
+import yosel.dev.catalogoexpress.screen.details.data.ProductDetailRepositoryImpl
+import yosel.dev.catalogoexpress.screen.details.domain.ProductDetailRepository
 import yosel.dev.catalogoexpress.screen.list.data.ProductListRepositoryImpl
 import yosel.dev.catalogoexpress.screen.list.domain.ProductListRepository
 import java.util.concurrent.TimeUnit
@@ -57,4 +59,8 @@ class AppModule {
     @Singleton
     @Provides
     fun provideListRepository(impl: ProductListRepositoryImpl): ProductListRepository = impl
+
+    @Singleton
+    @Provides
+    fun provideDetailRepository(impl: ProductDetailRepositoryImpl): ProductDetailRepository = impl
 }
